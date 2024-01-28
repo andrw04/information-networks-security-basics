@@ -1,3 +1,10 @@
-﻿// See https://aka.ms/new-console-template for more information
+﻿using FileEncryptor;
 
-Console.WriteLine("Hello, World!");
+string path = @"F:\test_input.txt";
+
+var fr = new FileReader(path);
+
+await foreach (var line in fr.GetDataAsync())
+{
+    Console.WriteLine(line);
+}
