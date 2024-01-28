@@ -39,7 +39,7 @@ public class CesarCipher : IEncryptStrategy
 
         for (var i = 0; i < text.Length; i++)
         {
-            int x, k = _shift, n = _indexes.Count;
+            int x, k = _shift - 1, n = _indexes.Count;
             
             if (_indexes.TryGetValue(char.ToLower(text[i]), out x))
             {
@@ -70,7 +70,7 @@ public class CesarCipher : IEncryptStrategy
 
         for (var i = 0; i < text.Length; i++)
         {
-            int y, k = _shift, n = _indexes.Count;
+            int y, k = _shift - 1, n = _indexes.Count;
 
             if (_indexes.TryGetValue(char.ToLower(text[i]), out y))
             {
