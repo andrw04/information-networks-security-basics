@@ -7,4 +7,9 @@ IEncryptStrategy cesarCipher = new CesarCipher(alphabet, 3);
 
 BaseEncryptor encryptor = new Encryptor(cesarCipher);
 
-Console.WriteLine(encryptor.Encrypt("abz"));
+string strForEncryption = "abX,.,/.,;lAKHfuhsdkjjqklwjtoehiubxckjnmlwnie";
+string encryptedString = encryptor.Encrypt(strForEncryption);
+Console.WriteLine(encryptedString);
+string decryptedString = encryptor.Decrypt(encryptedString);
+Console.WriteLine(decryptedString);
+Console.WriteLine(strForEncryption == decryptedString);
