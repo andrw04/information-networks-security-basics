@@ -39,11 +39,11 @@ public class CesarCipher : IEncryptStrategy
 
         for (var i = 0; i < text.Length; i++)
         {
-            int x;
+            int x, k = _shift, n = _indexes.Count;
             
             if (_indexes.TryGetValue(char.ToLower(text[i]), out x))
             {
-                int y = ((x + _shift < 0 ? x + _indexes.Count  : x) + _shift) % _indexes.Count;
+                int y = ((x + k < 0 ? x + n : x) + k) % n;
 
                 char symbol = _symbols[y];
 
@@ -70,11 +70,11 @@ public class CesarCipher : IEncryptStrategy
 
         for (var i = 0; i < text.Length; i++)
         {
-            int y;
+            int y, k = _shift, n = _indexes.Count;
 
             if (_indexes.TryGetValue(char.ToLower(text[i]), out y))
             {
-                int x = ((y - _shift  < 0 ? y + _indexes.Count : y) - _shift) % _indexes.Count;
+                int x = ((y - k  < 0 ? y + n : y) - k) % n;
                 
                 char symbol = _symbols[x];
                 
