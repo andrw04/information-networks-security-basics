@@ -2,20 +2,17 @@
 
 namespace EncryptionLibrary.Realizations;
 
-public class Encryptor(IEncryptStrategy strategy) : IEncryptor
+public class Encryptor : BaseEncryptor
 {
-    public string Encrypt()
+    public Encryptor(IEncryptStrategy strategy) : base(strategy) { }
+    
+    public override string Encrypt(string text)
     {
-        throw new NotImplementedException();
+        return Strategy.Encrypt(text);
     }
 
-    public string Decrypt()
+    public override string Decrypt(string text)
     {
-        throw new NotImplementedException();
-    }
-
-    public void SetStrategy(IEncryptStrategy strategy1)
-    {
-        strategy = strategy1;
+        return Strategy.Decrypt(text);
     }
 }

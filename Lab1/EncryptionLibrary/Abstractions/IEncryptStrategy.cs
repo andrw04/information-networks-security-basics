@@ -2,13 +2,6 @@
 
 public interface IEncryptStrategy
 {
-    public string Encrypt()
-    {
-        throw new NotImplementedException();
-    }
-
-    public string Decrypt()
-    {
-        throw new NotImplementedException();
-    }
+    public string Encrypt(string text);
+    public string Decrypt(string text);
 }

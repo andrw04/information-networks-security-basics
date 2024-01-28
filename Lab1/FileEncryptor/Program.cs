@@ -1,10 +1,10 @@
-﻿using FileEncryptor;
+﻿using EncryptionLibrary.Abstractions;
+using EncryptionLibrary.Realizations;
 
-string path = @"F:\test_input.txt";
+string alphabet = "abcdefghijklmnopqrstuvwxyz";
 
-var fr = new FileReader(path);
+IEncryptStrategy cesarCipher = new CesarCipher(alphabet, 3);
 
-await foreach (var line in fr.GetDataAsync())
-{
-    Console.WriteLine(line);
-}
+BaseEncryptor encryptor = new Encryptor(cesarCipher);
+
+Console.WriteLine(encryptor.Encrypt("abz"));
