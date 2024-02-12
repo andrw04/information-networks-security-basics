@@ -14,6 +14,16 @@ public class DataBlock
     {
         get => sb.ToString();
     }
+
+    public void Set(int index, char value)
+    {
+        sb[index] = value;
+    }
+
+    public char Get(int index)
+    {
+        return sb[index];
+    }
     public DataBlock(string str)
     {
         if (str.Length != 64)
@@ -30,11 +40,11 @@ public class DataBlock
         sb.Append(str);
     }
 
-    public void Swap(int left, int right)
+    public DataBlock()
     {
-        char temp = sb[left];
-        sb[left] = sb[right];
-        sb[right] = temp;
+        sb.Clear();
+        for (int i = 0; i < 64; i++)
+            sb.Append('0');
     }
 }
 
@@ -49,16 +59,18 @@ public class DES
         57, 49, 41, 33, 25, 17, 9, 1, 59, 51, 43, 35, 27, 19, 11, 3,
         61, 53, 45, 37, 29, 21, 13, 5, 63, 55, 47, 39, 31, 23, 15, 7
     };
+    
+    
 
     private static int[] InverseInitialPermutation =
     {
         40, 8, 48, 16, 56, 24, 64, 32, 39, 7, 47, 15, 55, 23, 63, 31,
         38, 6, 46, 14, 54, 22, 62, 30, 37, 5, 45, 13, 53, 21, 61, 29,
         36, 4, 44, 12, 52, 20, 60, 28, 35, 3, 43, 11, 51, 19, 59, 27,
-        34, 2, 42, 10, 50, 18, 58, 26, 33, 1, 41, 9, 49, 17, 57, 25,
+        34, 2, 42, 10, 50, 18, 58, 26, 33, 1, 41, 9,  49, 17, 57, 25,
     };
 
-    public static DataBlock[] DivideIntoBlocks(string data)
+    public static List<DataBlock> DivideIntoBlocks(string data)
     {
         List<DataBlock> result = new();
 
@@ -71,17 +83,40 @@ public class DES
             result.Add(new DataBlock(substring.PadLeft(64, '0')));
         }
         
-        return result.ToArray();
+        return result;
     }
 
-    public static void GetInitialPermutation(DataBlock[] blocks)
+    public static List<DataBlock> GetInitialPermutation(List<DataBlock> blocks)
     {
-        for (int i = 0; i < blocks.Length; i++)
+        List<DataBlock> result = new();
+        for (int i = 0; i < blocks.Count; i++)
         {
+            var newBlock = new DataBlock();
             for (int j = 0; j < blocks[i].Count; j++)
             {
-                blocks[i].Swap(j, InitialPermutation[j] - 1);
+                char temp = blocks[i].Get(InitialPermutation[j] - 1);
+                newBlock.Set(j, temp);
             }
+            result.Add(newBlock);
         }
+
+        return result;
+    }
+
+    public static List<DataBlock> GetInverseInitialPermutation(List<DataBlock> blocks)
+    {
+        List<DataBlock> result = new();
+        for (int i = 0; i < blocks.Count; i++)
+        {
+            var newBlock = new DataBlock();
+            for (int j = 0; j < blocks[i].Count; j++)
+            {
+                char temp = blocks[i].Get(InverseInitialPermutation[j] - 1);
+                newBlock.Set(j, temp);
+            }
+            result.Add(newBlock);
+        }
+
+        return result;
     }
 }
