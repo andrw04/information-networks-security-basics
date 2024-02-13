@@ -105,7 +105,8 @@ public partial class VigenerePage : Page, INotifyPropertyChanged
         if (!String.IsNullOrEmpty(InputText))
         {
             var encryptor = new Encryptor();
-            encryptor.SetStrategy(new VigenereCipher(_alphabet,_key));
+            var strategy = new VigenereCipher(_alphabet, _key);
+            encryptor.SetStrategy(strategy);
 
             OutputText = encryptor.Encrypt(InputText);
         }
@@ -116,7 +117,8 @@ public partial class VigenerePage : Page, INotifyPropertyChanged
         if (!String.IsNullOrEmpty(InputText))
         {
             var encryptor = new Encryptor();
-            encryptor.SetStrategy(new VigenereCipher(_alphabet,_key));
+            var strategy = new VigenereCipher(_alphabet, _key);
+            encryptor.SetStrategy(strategy);
 
             OutputText = encryptor.Decrypt(InputText);
         }
@@ -131,7 +133,8 @@ public partial class VigenerePage : Page, INotifyPropertyChanged
         else
         {
             var encryptor = new Encryptor();
-            encryptor.SetStrategy(new VigenereCipher(_alphabet, _key));
+            var strategy = new VigenereCipher(_alphabet, _key);
+            encryptor.SetStrategy(strategy);
             encryptor.EncryptFile(InputFilePath, OutputFilePath);
             MessageBox.Show("Success!");
         }
@@ -146,7 +149,8 @@ public partial class VigenerePage : Page, INotifyPropertyChanged
         else
         {
             var encryptor = new Encryptor();
-            encryptor.SetStrategy(new VigenereCipher(_alphabet, _key));
+            var strategy = new VigenereCipher(_alphabet, _key);
+            encryptor.SetStrategy(strategy);
             encryptor.DecryptFile(InputFilePath, OutputFilePath);
             MessageBox.Show("Success!");
         }

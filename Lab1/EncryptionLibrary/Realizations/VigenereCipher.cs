@@ -6,7 +6,6 @@ namespace EncryptionLibrary.Realizations;
 public class VigenereCipher : IEncryptStrategy
 {
     private Dictionary<char, int>? _indexes;
-    private char[]? _symbols;
     private CesarCipher? _cesarCipher;
     private string _key;
     
@@ -14,7 +13,7 @@ public class VigenereCipher : IEncryptStrategy
     {
         SetAlphabet(alphabet);
         _cesarCipher = new CesarCipher(alphabet);
-        SetKey(key);
+        _key = key;
     }
     
     public void SetAlphabet(string alphabet)
@@ -26,47 +25,41 @@ public class VigenereCipher : IEncryptStrategy
         {
             _indexes.Add(alphabet[i], i);
         }
-
-        _symbols = alphabet.ToArray();
     }
 
-    public void SetKey(string key)
+    private void EqualizeKeyAndText(string text)
     {
-        if (_indexes is not null)
+        if (_key.Length > text.Length)
         {
-            if (key.Length > _indexes.Count)
-            {
-                _key = key.Substring(0, _indexes.Count);
-            }
-            else
-            {
-                StringBuilder sb = new StringBuilder();
+            _key = _key.Substring(0, _indexes.Count);
+        }
+        else
+        {
+            StringBuilder sb = new StringBuilder();
 
-                while (sb.Length < _indexes?.Count)
-                {
-                    sb.Append(key);
-                }
-
-                _key = sb.ToString().Substring(0, _indexes.Count);
+            while (sb.Length < _indexes?.Count)
+            {
+                sb.Append(_key);
             }
+
+            _key = sb.ToString().Substring(0, text.Length);
         }
     }
     
     public string Encrypt(string text)
     {
-        if (_indexes is null || _symbols is null || _cesarCipher is null)
+        if (_indexes is null || _cesarCipher is null)
             throw new InvalidOperationException("Alphabet is not defined.");
 
-        if (_key.Length != text.Length)
-            throw new ArgumentException("Key length is not equal text length");
+        EqualizeKeyAndText(text);
 
         StringBuilder enctyptedString = new StringBuilder();
 
-        for (var i = 0; i < text.Length; i++)
+        for (var i = 0; i < _key.Length; i++)
         {
             int shift;
 
-            if (_indexes.TryGetValue(text[i], out shift))
+            if (_indexes.TryGetValue(_key[i], out shift))
             {
                 _cesarCipher.SetShift(shift);
 
@@ -88,11 +81,10 @@ public class VigenereCipher : IEncryptStrategy
 
     public string Decrypt(string text)
     {
-        if (_indexes is null || _symbols is null || _cesarCipher is null)
+        if (_indexes is null || _cesarCipher is null)
             throw new InvalidOperationException("Alphabet is not defined.");
-
-        if (_key.Length != text.Length)
-            throw new ArgumentException("Key length is not equal text length");
+        
+        EqualizeKeyAndText(text);
 
         StringBuilder dectyptedString = new StringBuilder();
 

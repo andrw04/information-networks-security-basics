@@ -19,6 +19,7 @@
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Text="Vigenere Cipher" Style="{StaticResource HeaderTextBlockStyle}"/>
         <ui:SimpleStackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
+            <Label Content="Key:"/>
             <TextBox Text="{Binding Key}"/>
         </ui:SimpleStackPanel>
         <ui:SimpleStackPanel Grid.Row="2" Grid.Column="0" Spacing="10" Margin="10">
