@@ -113,9 +113,12 @@ public class DES
         36,	4,	44,	12,	52,	20,	60,	28,	35,	3,	43,	11,	51,	19,	59,	27,
         34,	2,	42,	10,	50,	18,	58,	26,	33,	1,	41,	9,	49,	17,	57,	25,
     };
+
+    private DES() {}
     
-    public string Encrypt(string binaryText, string binaryKey)
+    public static string Encrypt(string binaryText, string binaryKey)
     {
+        binaryKey = binaryKey.Substring(binaryKey.Length - 64);
         string[] keys = GetKeys(binaryKey);
 
         StringBuilder result = new StringBuilder();
@@ -124,17 +127,15 @@ public class DES
         {
             string binarySubstring = binaryText.Substring(i, 64);
             string encryptedBinarySubstring = MakeInitialPermitationWithRounds(binarySubstring, keys);
-            /*Console.WriteLine(binarySubstring);
-            Console.WriteLine(encryptedBinarySubstring);
-            Console.WriteLine();*/
             result.Append(encryptedBinarySubstring);
         }
         
         return result.ToString();
     }
     
-    public string Decrypt(string binaryText, string binaryKey)
+    public static string Decrypt(string binaryText, string binaryKey)
     {
+        binaryKey = binaryKey.Substring(binaryKey.Length - 64);
         string[] keys = GetKeys(binaryKey);
         Array.Reverse(keys);
 
@@ -144,16 +145,13 @@ public class DES
         {
             string binarySubstring = binaryText.Substring(i, 64);
             string decryptedBinarySubstring = MakeInitialPermitationWithRounds(binarySubstring, keys);
-            /*Console.WriteLine(binarySubstring);
-            Console.WriteLine(decryptedBinarySubstring);
-            Console.WriteLine();*/
             result.Append(decryptedBinarySubstring);
         }
         
         return result.ToString();
     }
     
-    private string MakeInitialPermitationWithRounds(string binaryText, string[] binaryKeys)
+    private static string MakeInitialPermitationWithRounds(string binaryText, string[] binaryKeys)
     {
         if (binaryText.Length != 64)
             throw new ArgumentException($"Binary Text must be 64 length, but: {binaryText.Length}");
@@ -185,7 +183,7 @@ public class DES
         return result;
     }
     
-    public string ConvertToBinaryString(string original)
+    public static string ConvertToBinaryString(string original)
     {
         byte[] bytes = Encoding.UTF8.GetBytes(original);
 
@@ -206,7 +204,7 @@ public class DES
         return sb.ToString();
     }
 
-    public string ConvertFromBinaryString(string binary)
+    public static string ConvertFromBinaryString(string binary)
     {
         List<byte> byteList = new List<byte>();
         for (int i = 0; i < binary.Length; i += 8)
@@ -219,7 +217,7 @@ public class DES
         return Encoding.UTF8.GetString(byteList.ToArray());
     }
     
-    private string[] GetKeys(string binaryKey)
+    private static string[] GetKeys(string binaryKey)
     {
         if (binaryKey.Length != 64)
             throw new ArgumentException($"Binary key must be 64 length, but: {binaryKey.Length}");
@@ -244,7 +242,7 @@ public class DES
         return keys;
     }
     
-    private string Permutation(string original, int[] table)
+    private static string Permutation(string original, int[] table)
     {
         StringBuilder result = new StringBuilder();
 
@@ -256,7 +254,7 @@ public class DES
         return result.ToString();
     }
     
-    private (string left, string right) DivideEqually(string original)
+    private static (string left, string right) DivideEqually(string original)
     {
         if (original.Length % 2 != 0)
             throw new ArgumentException("Length must be even.");
@@ -266,7 +264,7 @@ public class DES
         return (original.Substring(0, middle), original.Substring(middle, middle));
     }
     
-    private string Shift(string original, int shift)
+    private static string Shift(string original, int shift)
     {
         StringBuilder result = new StringBuilder();
 
@@ -278,7 +276,7 @@ public class DES
         return result.ToString();
     }
     
-    private string Xor(string first, string second)
+    private static string Xor(string first, string second)
     {
         StringBuilder result = new StringBuilder();
 
@@ -293,7 +291,7 @@ public class DES
         return result.ToString();
     }
     
-    private string SBoxesSubstitution(string original, int[,,] sboxes)
+    private static string SBoxesSubstitution(string original, int[,,] sboxes)
     {
         StringBuilder result = new StringBuilder();
 
