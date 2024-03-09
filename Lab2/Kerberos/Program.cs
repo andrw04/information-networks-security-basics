@@ -1,1 +1,0 @@
-﻿string c = "client identificator"; // идентификатор клиента

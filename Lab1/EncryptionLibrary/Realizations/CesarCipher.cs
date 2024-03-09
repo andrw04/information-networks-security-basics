@@ -61,6 +61,12 @@ public class CesarCipher : IEncryptStrategy
         return encryptedString.ToString();
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="text"></param>
+    /// <returns></returns>
+    /// <exception cref="InvalidOperationException"></exception>
     public string Decrypt(string text)
     {
         if (_indexes is null || _symbols is null)

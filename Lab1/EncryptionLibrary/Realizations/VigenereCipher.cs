@@ -29,7 +29,7 @@ public class VigenereCipher : IEncryptStrategy
 
     private void EqualizeKeyAndText(string text)
     {
-        if (_key.Length > text.Length)
+        if (_key.Length > 26)
         {
             _key = _key.Substring(0, _indexes.Count);
         }

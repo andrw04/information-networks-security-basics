@@ -102,7 +102,7 @@ public partial class VigenerePage : Page, INotifyPropertyChanged
 
     private void EncryptString_OnClick(object sender, RoutedEventArgs e)
     {
-        if (!String.IsNullOrEmpty(InputText))
+        if (!String.IsNullOrEmpty(InputText) && !String.IsNullOrEmpty(Key))
         {
             var encryptor = new Encryptor();
             var strategy = new VigenereCipher(_alphabet, _key);
@@ -110,11 +110,15 @@ public partial class VigenerePage : Page, INotifyPropertyChanged
 
             OutputText = encryptor.Encrypt(InputText);
         }
+        else
+        {
+            MessageBox.Show("Incorrect input data!");
+        }
     }
 
     private void DecryptString_OnClick(object sender, RoutedEventArgs e)
     {
-        if (!String.IsNullOrEmpty(InputText))
+        if (!String.IsNullOrEmpty(InputText) && !String.IsNullOrEmpty(Key))
         {
             var encryptor = new Encryptor();
             var strategy = new VigenereCipher(_alphabet, _key);
@@ -122,13 +126,17 @@ public partial class VigenerePage : Page, INotifyPropertyChanged
 
             OutputText = encryptor.Decrypt(InputText);
         }
+        else
+        {
+            MessageBox.Show("Incorrect input data!");
+        }
     }
 
     private void EncryptFile_OnClick(object sender, RoutedEventArgs e)
     {
-        if (!File.Exists(InputFilePath) || !File.Exists(OutputFilePath))
+        if (!File.Exists(InputFilePath) || !File.Exists(OutputFilePath) || String.IsNullOrEmpty(Key))
         {
-            MessageBox.Show("Incorrect file path!");
+            MessageBox.Show("Incorrect input data!");
         }
         else
         {
@@ -142,9 +150,9 @@ public partial class VigenerePage : Page, INotifyPropertyChanged
 
     private void DecryptFile_OnClick(object sender, RoutedEventArgs e)
     {
-        if (!File.Exists(InputFilePath) || !File.Exists(OutputFilePath))
+        if (!File.Exists(InputFilePath) || !File.Exists(OutputFilePath) || String.IsNullOrEmpty(Key))
         {
-            MessageBox.Show("Incorrect file path!");
+            MessageBox.Show("Incorrect input data!");
         }
         else
         {

@@ -1,27 +1,26 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34330.188
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lab1", "Lab1", "{2C375FEE-9CD9-42EA-BD42-4E3C1E2C6D8E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EncryptionLibrary", "Lab1\EncryptionLibrary\EncryptionLibrary.csproj", "{654459BA-A772-4B41-AB5D-E2A1D5424E36}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EncryptionLibrary", "Lab1\EncryptionLibrary\EncryptionLibrary.csproj", "{654459BA-A772-4B41-AB5D-E2A1D5424E36}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfEncryptor", "Lab1\WpfEncryptor\WpfEncryptor.csproj", "{5968D9EE-FB96-4351-826C-1E77C0229F44}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WpfEncryptor", "Lab1\WpfEncryptor\WpfEncryptor.csproj", "{5968D9EE-FB96-4351-826C-1E77C0229F44}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lab2", "Lab2", "{E83665CC-1266-4408-8E80-7EB6B83E25AD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataEncryptionStandard", "Lab2\DataEncryptionStandard\DataEncryptionStandard.csproj", "{8A9B2B19-6A11-4E1A-8D31-67A7D8BC4430}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataEncryptionStandard", "Lab2\DataEncryptionStandard\DataEncryptionStandard.csproj", "{8A9B2B19-6A11-4E1A-8D31-67A7D8BC4430}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kerberos", "Lab2\Kerberos\Kerberos.csproj", "{1C0B436B-9E85-488E-9326-CC167D774E62}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Lab2\Domain\Domain.csproj", "{ABB77AF2-0A67-4A9A-A234-6346166DE04D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KerberosClient", "Lab2\KerberosClient\KerberosClient.csproj", "{BAC70DC3-5B68-4697-BC38-38C2494425D4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{654459BA-A772-4B41-AB5D-E2A1D5424E36} = {2C375FEE-9CD9-42EA-BD42-4E3C1E2C6D8E}
-		{5968D9EE-FB96-4351-826C-1E77C0229F44} = {2C375FEE-9CD9-42EA-BD42-4E3C1E2C6D8E}
-		{8A9B2B19-6A11-4E1A-8D31-67A7D8BC4430} = {E83665CC-1266-4408-8E80-7EB6B83E25AD}
-		{1C0B436B-9E85-488E-9326-CC167D774E62} = {E83665CC-1266-4408-8E80-7EB6B83E25AD}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{654459BA-A772-4B41-AB5D-E2A1D5424E36}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -36,9 +35,26 @@ Global
 		{8A9B2B19-6A11-4E1A-8D31-67A7D8BC4430}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8A9B2B19-6A11-4E1A-8D31-67A7D8BC4430}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8A9B2B19-6A11-4E1A-8D31-67A7D8BC4430}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1C0B436B-9E85-488E-9326-CC167D774E62}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1C0B436B-9E85-488E-9326-CC167D774E62}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1C0B436B-9E85-488E-9326-CC167D774E62}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1C0B436B-9E85-488E-9326-CC167D774E62}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ABB77AF2-0A67-4A9A-A234-6346166DE04D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ABB77AF2-0A67-4A9A-A234-6346166DE04D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ABB77AF2-0A67-4A9A-A234-6346166DE04D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ABB77AF2-0A67-4A9A-A234-6346166DE04D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BAC70DC3-5B68-4697-BC38-38C2494425D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BAC70DC3-5B68-4697-BC38-38C2494425D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BAC70DC3-5B68-4697-BC38-38C2494425D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BAC70DC3-5B68-4697-BC38-38C2494425D4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{654459BA-A772-4B41-AB5D-E2A1D5424E36} = {2C375FEE-9CD9-42EA-BD42-4E3C1E2C6D8E}
+		{5968D9EE-FB96-4351-826C-1E77C0229F44} = {2C375FEE-9CD9-42EA-BD42-4E3C1E2C6D8E}
+		{8A9B2B19-6A11-4E1A-8D31-67A7D8BC4430} = {E83665CC-1266-4408-8E80-7EB6B83E25AD}
+		{ABB77AF2-0A67-4A9A-A234-6346166DE04D} = {E83665CC-1266-4408-8E80-7EB6B83E25AD}
+		{BAC70DC3-5B68-4697-BC38-38C2494425D4} = {E83665CC-1266-4408-8E80-7EB6B83E25AD}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F13683EA-C0DA-44AC-A002-68E2ABF741DC}
 	EndGlobalSection
 EndGlobal
