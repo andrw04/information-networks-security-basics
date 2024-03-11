@@ -1,9 +1,16 @@
 ﻿using System.Collections;
+using System.Text;
+using System.Text.Json;
 
 namespace DataEncryptionStandard;
 
 public static class DES
 {
+    public static byte[] Encrypt<T>(T obj, byte[] key)
+    {
+        return Encrypt(Encoding.UTF8.GetBytes(JsonSerializer.Serialize<T>(obj)), key);
+    }
+
     public static byte[] Encrypt(byte[] text, byte[] key)
     {
         var keys = GetKeys(new BitArray(key));
@@ -34,10 +41,24 @@ public static class DES
         return resultArray;
     }
 
+    public static T Decrypt<T>(byte[] text, byte[] key)
+    {
+        var str = Encoding.UTF8.GetString(Decrypt(text, key));
+
+        return JsonSerializer.Deserialize<T>(str)!;
+    }
+
     public static byte[] Decrypt(byte[] text, byte[] key)
     {
         var keys = GetKeys(new BitArray(key));
         Array.Reverse(keys);
+
+        if (text.Length % 8 != 0)
+        {
+            var temp = text.ToList();
+            temp.AddRange(Enumerable.Range(0, 8 - text.Length % 8).Select(x => (byte)x));
+            text = temp.ToArray();
+        }
 
         var blocks = new BitArray(text).SplitBy(64).ToArray();
         var result = new BitArray(text.Length * 8);
