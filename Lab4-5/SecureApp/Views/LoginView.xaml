@@ -1,0 +1,41 @@
+﻿<Window x:Class="SecureApp.Views.LoginView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:local="clr-namespace:SecureApp.Views"
+        xmlns:viewModel="clr-namespace:SecureApp.ViewModels"
+        mc:Ignorable="d"
+        Title="LoginView" Height="450" Width="800">
+    
+    <Window.DataContext>
+        <viewModel:LoginViewModel/>
+    </Window.DataContext>
+    
+    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+        <Label>Username</Label>
+        <TextBox 
+            x:Name="txtUser"
+            Text="{Binding Username}"
+            MinWidth="300"
+            Margin="10"
+        />
+        <Label>Password</Label>
+        <PasswordBox
+            x:Name="txtPass"
+            PasswordChanged="PasswordBox_PasswordChanged"
+            MinWidth="300"
+            Margin="10"
+        />
+        <Button
+            x:Name="btnLogin"
+            Command="{Binding LoginCommand}"
+            Margin="10">
+            LOG IN
+        </Button>
+        <TextBlock
+            Text="{Binding ErrorMessage}"
+            Margin="10"
+            />
+    </StackPanel>
+</Window>
