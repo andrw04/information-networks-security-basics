@@ -99,7 +99,7 @@ static string AddDeadCode(string path) // создает избыточные п
             if (randomValue < 3)
                 sb.AppendLine($"string {StringDictionary.GetRandom()} = \"{StringDictionary.GetRandom()}\";");
             else if (randomValue < 6)
-                sb.AppendLine($"int {StringDictionary.GetRandom()} = {random.Next(123)} + {random.Next(321)} / {random.Next(111)};");
+                sb.AppendLine($"int {StringDictionary.GetRandom()} = {random.Next(123)} + {random.Next(321)} / {random.Next(1, 111)};");
             else
                 sb.AppendLine($"double {StringDictionary.GetRandom()} = 123 / 888 * 555;");
             sr.Peek();
@@ -126,31 +126,31 @@ static List<string> GenerateRandomInitializations(int count)
 static string GenerateRandomInitialization()
 {
     Random random = new Random();
-    Type[] types = { typeof(int), typeof(double), typeof(float), typeof(string), typeof(bool) };
+    string[] types = { "int", "double", "float", "string", "bool" };
 
-    Type type = types[random.Next(types.Length)];
+    string type = types[random.Next(types.Length)];
     string name = StringDictionary.GetRandom();
     string value = GenerateRandomValue(type);
 
-    string initialization = $"{type.Name} {name} = {value};";
+    string initialization = $"{type} {name} = {value};";
 
     return initialization;
 }
 
-static string GenerateRandomValue(Type type)
+static string GenerateRandomValue(string type)
 {
     Random random = new Random();
 
-    if (type == typeof(int))
+    if (type == "int")
         return random.Next().ToString();
-    else if (type == typeof(double))
+    else if (type == "double")
         return random.NextDouble().ToString();
-    else if (type == typeof(float))
+    else if (type == "float")
         return ((float)random.NextDouble()).ToString();
-    else if (type == typeof(string))
+    else if (type == "string")
         return $"\"{StringDictionary.GetRandom()}\"";
-    else if (type == typeof(bool))
-        return (random.Next() % 2 == 0).ToString();
+    else if (type == "bool")
+        return (random.Next() % 2 == 0).ToString().ToLower();
     else
         throw new ArgumentOutOfRangeException(nameof(type));
 }
@@ -162,8 +162,8 @@ static string AddRandomSpaceAndTabs(string code)
 
     return regex.Replace(code, match =>
     {
-        int numSpaces = random.Next(1, 50);
-        int numTabs = random.Next(1, 10);
+        int numSpaces = random.Next(1, 3);
+        int numTabs = random.Next(1, 2);
         return new string(' ', numSpaces) + new string('\t', numTabs);
     });
 }
