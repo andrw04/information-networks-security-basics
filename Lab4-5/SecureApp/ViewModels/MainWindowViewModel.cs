@@ -3,7 +3,6 @@ using System.IO;
 using System.Security.Principal;
 using System.Windows;
 using System.Windows.Input;
-using Microsoft.Win32;
 using SecureApp.Models;
 using SecureApp.Protection;
 using SecureApp.Repositories;
